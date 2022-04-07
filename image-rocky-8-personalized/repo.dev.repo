@@ -1,0 +1,9 @@
+[distribution-support]
+name=distribution-support
+baseurl=http://repo.dev.idnomic.com/ot-cms-pki/distribution-support/el7-64
+gpgcheck=0
+
+[distribution-support-@@APP@@]
+name=distribution-support-@@APP@@
+baseurl=http://repo.dev.idnomic.com/ot-cms-pki/distribution-support/el7-64-@@APP@@
+gpgcheck=0

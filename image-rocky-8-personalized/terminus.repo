@@ -1,0 +1,4 @@
+[terminus]
+name=terminus
+baseurl=http://terminus.keynectis-sa.local/repo/el7-64
+gpgcheck=0
