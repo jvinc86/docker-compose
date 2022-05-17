@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+
+  registry:
+    restart: always
+    image: registry:latest
+    ports:
+      - 5000:5000
+    volumes:
+      - ./neoregistry:/var/lib/registry
+    container_name: contenedor_registry
+
+  webserver:
+    restart: always
+    image: joxit/docker-registry-ui:latest
+    ports:
+      - 8787:80
+    environment:
+      - REGISTRY_TITLE=NEO Registry privado de Imagenes Docker BAD BUNNY
+      - NGINX_PROXY_PASS_URL=http://contenedor_registry:5000
+    depends_on:
+      - registry
+    container_name: contenedor_webserver

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  neomodel:
+    image: httpd:latest
+    ports:
+      - 8080:80
+    volumes:
+      - /home/vcamacho/paginaweb:/usr/local/apache2/htdocs/
+    container_name: contenedor
