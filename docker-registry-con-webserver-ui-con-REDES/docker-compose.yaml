@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+
+  registry:
+    restart: always
+    image: registry:latest
+    container_name: contenedor_registry
+    ports:
+      - 5000:5000
+    volumes:
+      - ./neoregistry:/var/lib/registry
+    environment:
+      - REGISTRY_STORAGE_DELETE_ENABLED=true
+    networks:
+      registry_docker:
+        ipv4_address: 10.0.0.2
+
+  webserver:
+    restart: always
+    image: joxit/docker-registry-ui:latest
+    container_name: contenedor_webserver
+    ports:
+      - 8787:80
+    environment:
+      - REGISTRY_TITLE=NEO Registry privado de Imagenes Docker BAD BUNNY
+      - NGINX_PROXY_PASS_URL=http://contenedor_registry:5000
+    networks:
+      registry_docker:
+        ipv4_address: 10.0.0.3
+    depends_on:
+      - registry
+
+networks:
+  registry_docker:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/24
+          gateway: 10.0.0.1
